@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///Users/edturner/Downloads/index_2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 5 · Branding Artístico</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+  :root {
+    --rojo: #C8102E;
+    --negro: #111111;
+    --blanco: #F8F6F1;
+    --gris: #6B6B6B;
+    --gris-claro: #E8E4DC;
+    --acento: #C8102E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--negro);
+    color: var(--blanco);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(248,246,241,0.1);
+    border: 1px solid rgba(248,246,241,0.15);
+    backdrop-filter: blur(12px);
+    padding: 0.6rem 1.2rem;
+    border-radius: 100px;
+    z-index: 100;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--blanco);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    transition: background 0.2s;
+    opacity: 0.7;
+  }
+  .nav button:hover { background: rgba(255,255,255,0.1); opacity: 1; }
+  .nav .counter { opacity: 0.5; min-width: 60px; text-align: center; }
+
+  /* SLIDES */
+  .slides { width: 100%; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .slide.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* ── SLIDE LAYOUTS ── */
+
+  /* PORTADA */
+  .slide-portada {
+    background: var(--negro);
+    justify-content: center;
+    padding: 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-portada::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(200,16,46,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .slide-portada::after {
+    content: 'BRANDING';
+    position: absolute;
+    right: -2rem;
+    bottom: 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 12rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .portada-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .portada-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+  .portada-titulo span { color: var(--rojo); }
+  .portada-sub {
+    font-size: 1.1rem;
+    color: rgba(248,246,241,0.55);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+  .portada-meta {
+    font-size: 0.8rem;
+    color: rgba(248,246,241,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  /* AGENDA */
+  .slide-agenda {
+    background: var(--blanco);
+    color: var(--negro);
+    padding: 4rem 6rem;
+    justify-content: center;
+  }
+  .agenda-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .agenda-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.02em;
+  }
+  .agenda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .agenda-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid rgba(17,17,17,0.1);
+  }
+  .agenda-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--rojo);
+    min-width: 24px;
+    padding-top: 0.1rem;
+    letter-spacing: 0.05em;
+  }
+  .agenda-texto strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+  .agenda-texto span {
+    font-size: 0.8rem;
+    color: var(--gris);
+    font-weight: 300;
+  }
+
+  /* CONTENIDO ESTÁNDAR */
+  .slide-contenido {
+    padding: 3.5rem 6rem;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .bloque-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    font-weight: 500;
+  }
+  .slide-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .slide-titulo span { color: var(--rojo); }
+
+  /* CITA */
+  .cita-grande {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    border-left: 3px solid var(--rojo);
+    padding-left: 1.5rem;
+    color: rgba(248,246,241,0.9);
+    max-width: 720px;
+  }
+
+  /* TARJETAS */
+  .cards-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(248,246,241,0.08);
+  }
+  .cards-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards-2 { grid-template-columns: 1fr 1fr; }
+  .cards-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: rgba(248,246,241,0.04);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: background 0.2s;
+  }
+  .card:hover { background: rgba(248,246,241,0.07); }
+  .card-icon { font-size: 1.6rem; }
+  .card-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(200,16,46,0.3);
+    line-height: 1;
+  }
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: rgba(248,246,241,0.6);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .card .ref {
+    font-size: 0.72rem;
+    color: rgba(248,246,241,0.3);
+    font-style: italic;
+    margin-top: auto;
+  }
+
+  /* CARD CLARO (para slide sobre fondo blanco) */
+  .card-claro {
+    background: white;
+    color: var(--negro);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    border: 1px solid rgba(17,17,17,0.08);
+    border-radius: 4px;
+  }
+  .card-claro h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .card-claro p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* SPLIT 2 COLUMNAS */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .split-bloque h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--rojo);
+  }
+  .split-bloque ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .split-bloque ul li {
+    font-size: 0.88rem;
+    color: rgba(248,246,241,0.75);
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+    font-weight: 300;
+  }
+  .split-bloque ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rojo);
+    font-weight: 400;
+  }
+  .split-bloque .highlight {
+    margin-top: 0.8rem;
+    font-size: 0.82rem;
+    background: rgba(200,16,46,0.12);
+    border-left: 2px solid var(--rojo);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0 4px 4px 0;
+    color: rgba(248,246,241,0.8);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* FONDO BLANCO SLIDE */
+  .slide-blanco {
+    background: var(--blanco);
+    color: var(--negro);
+    padding: 3.5rem 6rem;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .slide-blanco .bloque-label { color: var(--rojo); }
+  .slide-blanco .slide-titulo { color: var(--negro); }
+
+  /* DIAGRAMA CÍRCULOS */
+  .circulos-wrap {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+  .circulos-svg {
+    flex-shrink: 0;
+  }
+  .circulos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .circulo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .circulo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+  .circulo-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .circulo-item p {
+    font-size: 0.82rem;
+    color: rgba(248,246,241,0.6);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* PVA */
+  .pva-formula {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .pva-bloque {
+    background: rgba(248,246,241,0.06);
+    border: 1px solid rgba(248,246,241,0.1);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+  }
+  .pva-bloque .label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  .pva-bloque .valor {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .pva-mas {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    color: rgba(248,246,241,0.3);
+    font-weight: 300;
+  }
+
+  /* CASOS ARTISTAS */
+  .caso-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(248,246,241,0.1);
+  }
+  .caso-avatar {
+    width: 56px;
+    height: 56px;
+    background: var(--rojo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .caso-nombre h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .caso-nombre span {
+    font-size: 0.78rem;
+    color: rgba(248,246,241,0.45);
+    letter-spacing: 0.05em;
+  }
+
+  /* BRIEF */
+  .brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(248,246,241,0.08);
+  }
+  .brief-item {
+    background: rgba(248,246,241,0.03);
+    padding: 1.2rem 1.5rem;
+  }
+  .brief-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--rojo);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .brief-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .brief-item p {
+    font-size: 0.8rem;
+    color: rgba(248,246,241,0.5);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* TAREA */
+  .tarea-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .tarea-intro h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .tarea-intro p {
+    font-size: 0.85rem;
+    color: rgba(248,246,241,0.65);
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+  }
+  .tarea-tag {
+    display: inline-block;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.3);
+    color: var(--rojo);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+  .tarea-puntos {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(248,246,241,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .tarea-punto {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid rgba(248,246,241,0.06);
+    align-items: flex-start;
+  }
+  .tarea-punto:last-child { border-bottom: none; }
+  .tarea-punto .n {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--rojo);
+    min-width: 18px;
+    padding-top: 0.1rem;
+  }
+  .tarea-punto .t {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .tarea-punto .t strong { font-weight: 600; }
+  .tarea-punto .t span {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(248,246,241,0.45);
+    font-weight: 300;
+    margin-top: 0.15rem;
+  }
+
+  /* CIERRE */
+  .slide-cierre {
+    background: var(--rojo);
+    padding: 4rem 6rem;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .cierre-cita {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 760px;
+  }
+  .cierre-takeaways {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.15);
+    margin-top: 1rem;
+  }
+  .cierre-takeaway {
+    background: rgba(255,255,255,0.08);
+    padding: 1.5rem;
+  }
+  .cierre-takeaway .icono { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .cierre-takeaway h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .cierre-takeaway p {
+    font-size: 0.78rem;
+    opacity: 0.75;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* NOTA AL PIE */
+  .ref-pie {
+    font-size: 0.7rem;
+    color: rgba(248,246,241,0.3);
+    font-style: italic;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(248,246,241,0.06);
+  }
+  .ref-pie-oscuro {
+    font-size: 0.7rem;
+    color: rgba(17,17,17,0.35);
+    font-style: italic;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(17,17,17,0.07);
+  }
+
+  /* SLIDE CASO EJEMPLOS PVA */
+  .pva-casos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(248,246,241,0.08);
+  }
+  .pva-caso {
+    background: rgba(248,246,241,0.04);
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .pva-caso .artista {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .pva-caso .genero {
+    font-size: 0.72rem;
+    color: var(--rojo);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .pva-caso .pva-texto {
+    font-size: 0.85rem;
+    color: rgba(248,246,241,0.65);
+    line-height: 1.6;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .pva-caso .pva-pregunta {
+    font-size: 0.78rem;
+    color: rgba(248,246,241,0.35);
+    margin-top: auto;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(248,246,241,0.08);
+    font-weight: 300;
+  }
+
+  /* BRIEF EJEMPLO */
+  .brief-ejemplo {
+    background: rgba(248,246,241,0.04);
+    border: 1px solid rgba(248,246,241,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .brief-ejemplo-header {
+    background: var(--rojo);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brief-ejemplo-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .brief-ejemplo-header span {
+    font-size: 0.72rem;
+    opacity: 0.75;
+  }
+  .brief-ejemplo-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(248,246,241,0.08);
+  }
+  .be-campo {
+    background: rgba(248,246,241,0.03);
+    padding: 0.9rem 1.2rem;
+  }
+  .be-campo .etiqueta {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(248,246,241,0.4);
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  .be-campo .valor {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: rgba(248,246,241,0.85);
+  }
+  .be-campo.full {
+    grid-column: 1 / -1;
+  }
+  .be-campo .valor em {
+    color: rgba(248,246,241,0.45);
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="slides">
+
+  <!-- SLIDE 1: PORTADA -->
+  <div class="slide slide-portada active" id="slide-1">
+    <div class="portada-tag">Semana 5 · Unidad 2, Tema 1</div>
+    <div class="portada-titulo">Branding<br><span>Artístico</span></div>
+    <div class="portada-sub">Cómo construir una identidad propia: auténtica, comunicable y que dure más que una tendencia.</div>
+    <div class="portada-meta">Marketing para la Industria de la Música · Prof. Ed Turner · Explayarte</div>
+  </div>
+
+  <!-- SLIDE 2: AGENDA -->
+  <div class="slide slide-agenda" id="slide-2">
+    <div class="agenda-label">Hoy veremos</div>
+    <div class="agenda-titulo">Agenda de la clase</div>
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <div class="agenda-num">01</div>
+        <div class="agenda-texto">
+          <strong>Branding ≠ diseño</strong>
+          <span>Por qué el logo es la parte menos importante</span>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">02</div>
+        <div class="agenda-texto">
+          <strong>Los tres círculos</strong>
+          <span>El modelo para construir tu identidad de adentro hacia afuera</span>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">03</div>
+        <div class="agenda-texto">
+          <strong>Propuesta de valor artística</strong>
+          <span>¿Por qué tú y no los otros mil?</span>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">04</div>
+        <div class="agenda-texto">
+          <strong>El brief de marca</strong>
+          <span>La herramienta que usan los sellos antes de invertir</span>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">05</div>
+        <div class="agenda-texto">
+          <strong>Tarea</strong>
+          <span>Tu propio brief de marca artística</span>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">06</div>
+        <div class="agenda-texto">
+          <strong>Cierre</strong>
+          <span>Tres ideas para llevarse hoy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: BRANDING ≠ DISEÑO -->
+  <div class="slide slide-contenido" id="slide-3">
+    <div class="bloque-label">Bloque 1 · Fundamentos</div>
+    <div class="slide-titulo">Branding <span>≠</span> Diseño</div>
+    <div class="cita-grande">"Tu logo no es tu marca. Tu marca es la razón por la que alguien te sigue."</div>
+    <div class="cards-grid cards-3" style="margin-top:0.5rem;">
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Es estrategia, no estética</h3>
+        <p>El branding empieza con decisiones, no con Photoshop. La estética viene después de saber quién eres.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📅</div>
+        <h3>Empieza antes del primer lanzamiento</h3>
+        <p>Los artistas que definen su marca tarde ya tienen una imagen que no eligieron. El mercado se la asignó.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎤</div>
+        <h3>Lo decide el artista, no el diseñador</h3>
+        <p>El diseñador ejecuta. El artista decide quién es. Sin esa decisión, el diseño no tiene dirección.</p>
+      </div>
+    </div>
+    <div class="ref-pie">Ref: Borg, B. (2020). Music Marketing for the DIY Musician. Hal Leonard.</div>
+  </div>
+
+  <!-- SLIDE 4: LOS TRES CÍRCULOS -->
+  <div class="slide slide-contenido" id="slide-4">
+    <div class="bloque-label">Bloque 2 · Modelo de construcción</div>
+    <div class="slide-titulo">Los <span>tres círculos</span></div>
+    <div class="circulos-wrap">
+      <svg class="circulos-svg" width="260" height="260" viewBox="0 0 260 260">
+        <!-- Círculo exterior -->
+        <circle cx="130" cy="130" r="120" fill="rgba(200,16,46,0.08)" stroke="rgba(200,16,46,0.25)" stroke-width="1"></circle>
+        <text x="130" y="26" text-anchor="middle" fill="rgba(200,16,46,0.7)" font-family="DM Sans" font-size="10" font-weight="500" letter-spacing="1">CÓMO LO COMUNICAS</text>
+        <!-- Círculo medio -->
+        <circle cx="130" cy="130" r="82" fill="rgba(200,16,46,0.1)" stroke="rgba(200,16,46,0.35)" stroke-width="1"></circle>
+        <text x="130" y="57" text-anchor="middle" fill="rgba(200,16,46,0.75)" font-family="DM Sans" font-size="10" font-weight="500" letter-spacing="1">A QUIÉN LE HABLAS</text>
+        <!-- Círculo interior -->
+        <circle cx="130" cy="130" r="44" fill="rgba(200,16,46,0.25)" stroke="rgba(200,16,46,0.6)" stroke-width="1.5"></circle>
+        <text x="130" y="125" text-anchor="middle" fill="#F8F6F1" font-family="Syne, sans-serif" font-size="11" font-weight="700">QUIÉN</text>
+        <text x="130" y="140" text-anchor="middle" fill="#F8F6F1" font-family="Syne, sans-serif" font-size="11" font-weight="700">ERES</text>
+      </svg>
+      <div class="circulos-lista">
+        <div class="circulo-item">
+          <div class="circulo-dot" style="background:#C8102E;"></div>
+          <div>
+            <h4>Círculo 1 — Quién eres</h4>
+            <p>Tus valores, tus referencias, tu historia, lo que no negocias. Este es el núcleo. Todo lo demás sale de aquí.</p>
+          </div>
+        </div>
+        <div class="circulo-item">
+          <div class="circulo-dot" style="background:rgba(200,16,46,0.6);"></div>
+          <div>
+            <h4>Círculo 2 — A quién le hablas</h4>
+            <p>Tu identidad tiene que resonar con alguien específico. No con todos. Ya vimos esto en la Semana 3 — aquí se conecta.</p>
+          </div>
+        </div>
+        <div class="circulo-item">
+          <div class="circulo-dot" style="background:rgba(200,16,46,0.3);"></div>
+          <div>
+            <h4>Círculo 3 — Cómo lo comunicas</h4>
+            <p>Visual, sonoro, narrativo. Es la capa que el público ve. Debe <em>salir</em> del círculo 1, no al revés.</p>
+          </div>
+        </div>
+        <div style="margin-top:0.5rem; background:rgba(200,16,46,0.1); border-left:2px solid var(--rojo); padding:0.7rem 1rem; border-radius:0 4px 4px 0;">
+          <p style="font-size:0.82rem; color:rgba(248,246,241,0.75); line-height:1.5;">⚠️ <strong>El error más común:</strong> los artistas empiezan por el círculo 3 — eligen los filtros, el logo, los colores — sin haber resuelto quiénes son. La estética es una consecuencia, no un punto de partida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: EJEMPLO — LADY GAGA -->
+  <div class="slide slide-contenido" id="slide-5">
+    <div class="bloque-label">Bloque 2 · Ejemplo en acción</div>
+    <div class="slide-titulo">Lady Gaga: el <span>núcleo que no cambia</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;">
+      <div>
+        <p style="font-size:0.95rem; line-height:1.7; color:rgba(248,246,241,0.8); margin-bottom:1.2rem; font-weight:300;">
+          Gaga ha tenido docenas de looks, colaboraciones y géneros distintos. Pero si buscas su círculo 1, siempre estuvo ahí desde el principio:
+        </p>
+        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+          <div style="display:flex; align-items:center; gap:0.8rem;">
+            <div style="width:8px; height:8px; background:var(--rojo); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:0.88rem; font-weight:400;">Alteridad — nunca encajar fue la estrategia</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.8rem;">
+            <div style="width:8px; height:8px; background:var(--rojo); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:0.88rem; font-weight:400;">Teatro — cada era es un show completo</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.8rem;">
+            <div style="width:8px; height:8px; background:var(--rojo); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:0.88rem; font-weight:400;">Arte como provocación — siempre hay una idea detrás</span>
+          </div>
+        </div>
+        <p style="font-size:0.82rem; color:rgba(248,246,241,0.5); margin-top:1.2rem; line-height:1.6; font-weight:300;">
+          La estética cambia era a era. El núcleo no. Eso es lo que hace que un fan de <em>The Fame</em> todavía reconozca a Gaga en <em>Chromatica</em> o en <em>Harlequin</em>.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1px; background:rgba(248,246,241,0.08);">
+        <div style="background:rgba(248,246,241,0.04); padding:1.2rem 1.4rem;">
+          <div style="font-size:0.68rem; color:var(--rojo); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; font-weight:500;">The Fame · 2008</div>
+          <p style="font-size:0.83rem; color:rgba(248,246,241,0.65); font-weight:300;">Pop estridente, estética camp, vestidos de carne. La rareza como propuesta de valor.</p>
+        </div>
+        <div style="background:rgba(248,246,241,0.04); padding:1.2rem 1.4rem;">
+          <div style="font-size:0.68rem; color:var(--rojo); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; font-weight:500;">Joanne · 2016</div>
+          <p style="font-size:0.83rem; color:rgba(248,246,241,0.65); font-weight:300;">Rock americano, sombrero rosa, estética más "natural". Distinto pero reconocible.</p>
+        </div>
+        <div style="background:rgba(248,246,241,0.04); padding:1.2rem 1.4rem;">
+          <div style="font-size:0.68rem; color:var(--rojo); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; font-weight:500;">Chromatica · 2020</div>
+          <p style="font-size:0.83rem; color:rgba(248,246,241,0.65); font-weight:300;">Vuelta al pop, colores neón, mundo distópico-futurista. El círculo 1 intacto: arte y teatro.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ref-pie">El núcleo de identidad es lo que conecta todas las eras. La estética es la ropa que cambia; el cuerpo sigue siendo el mismo.</div>
+  </div>
+
+  <!-- SLIDE 6: PROPUESTA DE VALOR ARTÍSTICA -->
+  <div class="slide slide-contenido" id="slide-6">
+    <div class="bloque-label">Bloque 3 · Concepto central</div>
+    <div class="slide-titulo">Propuesta de Valor <span>Artística</span></div>
+    <div class="cita-grande" style="font-size:1.5rem;">"¿Por qué alguien debería seguirte <em>a ti</em> y no a los otros mil artistas que hacen algo parecido?"</div>
+    <div class="pva-formula">
+      <div class="pva-bloque">
+        <div class="label">Qué ofreces</div>
+        <div class="valor">Sonido · Estética · Experiencia</div>
+      </div>
+      <div class="pva-mas">+</div>
+      <div class="pva-bloque">
+        <div class="label">A quién</div>
+        <div class="valor">Audiencia específica</div>
+      </div>
+      <div class="pva-mas">+</div>
+      <div class="pva-bloque">
+        <div class="label">Por qué tú</div>
+        <div class="valor">El diferenciador real</div>
+      </div>
+      <div class="pva-mas">=</div>
+      <div class="pva-bloque" style="border-color:var(--rojo); background:rgba(200,16,46,0.12);">
+        <div class="label">Tu PVA</div>
+        <div class="valor" style="color:var(--rojo);">Una oración</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; color:rgba(248,246,241,0.55); line-height:1.6; font-weight:300; max-width:640px;">
+      No es un slogan publicitario. Es la respuesta honesta a por qué existes en un mercado saturado. Si no puedes responderla en una oración, la marca todavía no está clara.
+    </p>
+    <div class="ref-pie">Adaptado de: Kotler, P. &amp; Scheff, J. (1997). Standing Room Only. Harvard Business School Press.</div>
+  </div>
+
+  <!-- SLIDE 7: PVA EN PRÁCTICA -->
+  <div class="slide slide-contenido" id="slide-7">
+    <div class="bloque-label">Bloque 3 · Discusión en clase</div>
+    <div class="slide-titulo">PVA en <span>práctica</span> — sus primeras salidas al mercado</div>
+    <div class="pva-casos">
+      <div class="pva-caso">
+        <div class="artista">Cuco</div>
+        <div class="genero">Bedroom pop · Chicano · Hawthorne, CA</div>
+        <div class="pva-texto">Bedroom pop en español con humor absurdo y melancolía adolescente — para el fan latino que nunca se vio reflejado en el indie estadounidense.</div>
+        <div style="margin-top:0.6rem; padding-top:0.6rem; border-top:1px solid rgba(248,246,241,0.08);">
+          <div style="font-size:0.65rem; color:var(--rojo); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:0.3rem;">▶ Video en clase</div>
+          <div style="font-size:0.78rem; color:rgba(248,246,241,0.7); font-weight:400; margin-bottom:0.2rem;">"Lover is a Day" — <em>wannabewithu</em> (2016)</div>
+          <div style="font-size:0.7rem; color:rgba(248,246,241,0.35); font-family:monospace;">youtube.com/watch?v=Y5OUqOVrJQA</div>
+          <div style="font-size:0.72rem; color:rgba(248,246,241,0.45); margin-top:0.3rem; font-style:italic;">Grabado en casa, a los 18 años. Sin sello, sin presupuesto. Lo subió a Bandcamp y SoundCloud. Así empezó todo.</div>
+        </div>
+      </div>
+      <div class="pva-caso" style="border:1px solid rgba(200,16,46,0.25); background:rgba(200,16,46,0.06);">
+        <div class="artista">Aurora</div>
+        <div class="genero">Folk experimental · Bergen, Noruega</div>
+        <div class="pva-texto">Folk experimental con espiritualidad pagana y fragilidad emocional sin filtro — para quien busca música que se siente sagrada, no comercial.</div>
+        <div style="margin-top:0.6rem; padding-top:0.6rem; border-top:1px solid rgba(200,16,46,0.15);">
+          <div style="font-size:0.65rem; color:var(--rojo); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:0.3rem;">▶ Video en clase</div>
+          <div style="font-size:0.78rem; color:rgba(248,246,241,0.7); font-weight:400; margin-bottom:0.2rem;">"Runaway" — single debut (2015)</div>
+          <div style="font-size:0.7rem; color:rgba(248,246,241,0.35); font-family:monospace;">youtube.com/watch?v=d_HlPboLRL8</div>
+          <div style="font-size:0.72rem; color:rgba(248,246,241,0.45); margin-top:0.3rem; font-style:italic;">Filmado en la nieve de Bergen en 3 días. Sin presupuesto. Aurora tenía 18 años.</div>
+        </div>
+      </div>
+      <div class="pva-caso">
+        <div class="artista">Billie Eilish</div>
+        <div class="genero">Pop oscuro · DIY · Los Ángeles</div>
+        <div class="pva-texto">Pop oscuro construido desde el cuarto, con vulnerabilidad extrema como propuesta — para la generación que creció en internet y aprendió que mostrar el proceso es más honesto que el producto perfecto.</div>
+        <div style="margin-top:0.6rem; padding-top:0.6rem; border-top:1px solid rgba(248,246,241,0.08);">
+          <div style="font-size:0.65rem; color:var(--rojo); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:0.3rem;">▶ Video en clase</div>
+          <div style="font-size:0.78rem; color:rgba(248,246,241,0.7); font-weight:400; margin-bottom:0.2rem;">"bad guy" — <em>When We All Fall Asleep</em> (2019)</div>
+          <div style="font-size:0.7rem; color:rgba(248,246,241,0.35); font-family:monospace;">youtube.com/watch?v=DyDfgMOUjCI</div>
+          <div style="font-size:0.72rem; color:rgba(248,246,241,0.45); margin-top:0.3rem; font-style:italic;">Grabado con Finneas en el cuarto de su casa. Debut album. #1 en 16 países.</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(200,16,46,0.1); border:1px solid rgba(200,16,46,0.25); border-radius:4px; padding:0.8rem 1.2rem; display:flex; align-items:flex-start; gap:0.8rem;">
+      <span style="font-size:1rem; flex-shrink:0;">🔗</span>
+      <p style="font-size:0.8rem; color:rgba(248,246,241,0.75); line-height:1.6; font-weight:300;"><strong style="color:var(--rojo);">Conexión real:</strong> Billie Eilish dijo en BBC Radio 1 que a los 12 años vio "Runaway" de Aurora en YouTube y fue el momento en que decidió hacer música. Aurora respondió: <em>"Runaway ha servido el propósito que debe servir la música."</em> — Dos de los tres artistas de esta slide están conectados directamente por una marca que llegó al momento justo.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: EL BRIEF DE MARCA -->
+  <div class="slide slide-contenido" id="slide-8">
+    <div class="bloque-label">Bloque 4 · Herramienta profesional</div>
+    <div class="slide-titulo">El <span>Brief</span> de Marca Artística</div>
+    <p style="font-size:0.88rem; color:rgba(248,246,241,0.55); font-weight:300;">Lo que los sellos definen antes de invertir un peso en un artista.</p>
+    <div class="brief-grid">
+      <div class="brief-item">
+        <div class="brief-num">01</div>
+        <h4>Nombre artístico</h4>
+        <p>¿Cuál es y por qué? ¿Qué comunica antes de que alguien escuche una nota?</p>
+      </div>
+      <div class="brief-item">
+        <div class="brief-num">02</div>
+        <h4>Tres palabras de identidad</h4>
+        <p>No géneros musicales. Valores, actitudes, sensaciones que definen el proyecto.</p>
+      </div>
+      <div class="brief-item">
+        <div class="brief-num">03</div>
+        <h4>Audiencia primaria</h4>
+        <p>Específica. No "jóvenes de 18–25" — personas reales con contexto, hábitos e intereses.</p>
+      </div>
+      <div class="brief-item">
+        <div class="brief-num">04</div>
+        <h4>PVA en una oración</h4>
+        <p>¿Por qué este proyecto y no otro? La respuesta más honesta posible.</p>
+      </div>
+      <div class="brief-item">
+        <div class="brief-num">05</div>
+        <h4>Referencias visuales</h4>
+        <p>Tres artistas o estéticas que podrían inspirar la imagen. Con explicación de por qué cada una.</p>
+      </div>
+      <div class="brief-item">
+        <div class="brief-num">06</div>
+        <h4>Referencias sonoras</h4>
+        <p>Tres artistas o subgéneros que se acercan al sonido. Misma lógica.</p>
+      </div>
+      <div class="brief-item" style="grid-column:1/-1; border-top:1px solid rgba(200,16,46,0.2); background:rgba(200,16,46,0.06);">
+        <div class="brief-num">07</div>
+        <h4>Lo que NO es esta marca</h4>
+        <p>Al menos dos cosas que este artista nunca haría, nunca diría, nunca usaría. Este punto vale igual que todos los anteriores.</p>
+      </div>
+    </div>
+    <div class="ref-pie">Ref: Baskerville, D. &amp; Baskerville, T. (2020). Music Business Handbook and Career Guide, 12th ed. SAGE.</div>
+  </div>
+
+  <!-- SLIDE 9: EJEMPLO BRIEF (ROSALÍA) -->
+  <div class="slide slide-contenido" id="slide-9">
+    <div class="bloque-label">Bloque 4 · Ejemplo aplicado</div>
+    <div class="slide-titulo">Brief de marca: <span>Rosalía</span> (2017)</div>
+    <p style="font-size:0.8rem; color:rgba(248,246,241,0.4); font-weight:300; font-style:italic;">Reconstrucción hipotética — cómo pudo haberse definido antes de El Mal Querer</p>
+    <div class="brief-ejemplo">
+      <div class="brief-ejemplo-header">
+        <h3>ROSALÍA — Brief interno de marca · 2017</h3>
+        <span>Documento confidencial · Uso interno</span>
+      </div>
+      <div class="brief-ejemplo-body">
+        <div class="be-campo">
+          <div class="etiqueta">Nombre artístico</div>
+          <div class="valor">Rosalía — nombre propio como marca. Sin apellido, sin adornos. La sencillez del nombre contrasta con la complejidad del proyecto.</div>
+        </div>
+        <div class="be-campo">
+          <div class="etiqueta">Tres palabras</div>
+          <div class="valor">Tradición · Ruptura · Rigor</div>
+        </div>
+        <div class="be-campo">
+          <div class="etiqueta">Audiencia primaria</div>
+          <div class="valor">Escuchas de 20–35 años con interés en música de autor, crítica de arte y cultura contemporánea. No fans del flamenco tradicional.</div>
+        </div>
+        <div class="be-campo">
+          <div class="etiqueta">PVA</div>
+          <div class="valor">Artista formada en flamenco que usa ese lenguaje para hablar del presente — para quien quiere emoción real sin nostalgia.</div>
+        </div>
+        <div class="be-campo">
+          <div class="etiqueta">Referencias visuales</div>
+          <div class="valor">Fotografía de moda de los 90s · Iconografía católica española · Cine de Almodóvar</div>
+        </div>
+        <div class="be-campo">
+          <div class="etiqueta">Referencias sonoras</div>
+          <div class="valor">Camarón de la Isla · FKA twigs · Björk</div>
+        </div>
+        <div class="be-campo full" style="background:rgba(200,16,46,0.07); border-top:1px solid rgba(200,16,46,0.15);">
+          <div class="etiqueta">Lo que NO es esta marca</div>
+          <div class="valor">No es flamenco de tablao. No es artista "étnica" para mercado extranjero. No compite con el pop mainstream ni lo imita. No sacrifica el rigor técnico por tendencias.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: TAREA -->
+  <div class="slide slide-contenido" id="slide-10">
+    <div class="bloque-label">Tarea · Para la próxima sesión</div>
+    <div class="slide-titulo">Tu <span>Brief</span> de Marca Artística</div>
+    <div class="tarea-wrap">
+      <div class="tarea-intro">
+        <h3>¿Qué van a entregar?</h3>
+        <p>Un brief completo para un proyecto musical. Puede ser real, ficticio o de un artista emergente poco conocido.</p>
+        <p><strong style="color:rgba(248,246,241,0.8);">Nada de Taylor Swift o Peso Pluma para este ejercicio.</strong> La idea es que construyan desde cero, no que analicen.</p>
+        <div style="margin-top:1rem;">
+          <div class="tarea-tag">Formato: Google Doc o Word</div>
+        </div>
+        <div style="margin-top:0.8rem;">
+          <div class="tarea-tag" style="background:rgba(248,246,241,0.08); border-color:rgba(248,246,241,0.15); color:rgba(248,246,241,0.6);">Entrega: antes de la próxima clase</div>
+        </div>
+      </div>
+      <div class="tarea-puntos">
+        <div class="tarea-punto">
+          <div class="n">01</div>
+          <div class="t"><strong>Nombre artístico</strong> — ¿Cuál es y por qué? Si es ficticio, justifica la elección.</div>
+        </div>
+        <div class="tarea-punto">
+          <div class="n">02</div>
+          <div class="t"><strong>Tres palabras</strong> — Que definen la identidad. No géneros: valores, actitudes, sensaciones.</div>
+        </div>
+        <div class="tarea-punto">
+          <div class="n">03</div>
+          <div class="t"><strong>Audiencia primaria</strong> — Sé específico/a. Descríbelos como personas reales, no como un rango de edad.</div>
+        </div>
+        <div class="tarea-punto">
+          <div class="n">04</div>
+          <div class="t"><strong>PVA en una oración</strong> — ¿Por qué este proyecto y no los otros mil?</div>
+        </div>
+        <div class="tarea-punto">
+          <div class="n">05</div>
+          <div class="t"><strong>Referencias visuales</strong> — Tres artistas o estéticas con explicación de por qué cada una.</div>
+        </div>
+        <div class="tarea-punto">
+          <div class="n">06</div>
+          <div class="t"><strong>Referencias sonoras</strong> — Tres artistas o subgéneros. Misma lógica.</div>
+        </div>
+        <div class="tarea-punto" style="background:rgba(200,16,46,0.08);">
+          <div class="n" style="color:var(--rojo);">07</div>
+          <div class="t"><strong>Lo que NO es esta marca</strong> — Al menos dos cosas que este artista nunca haría. <span>Igual de importante que todo lo anterior.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: CIERRE -->
+  <div class="slide slide-cierre" id="slide-11">
+    <div class="portada-tag" style="color:rgba(255,255,255,0.7);">Semana 5 · Cierre</div>
+    <div class="cierre-cita">"El branding no es inventarte un personaje. Es decidir qué parte de ti quieres amplificar — y ser consistente con eso."</div>
+    <div class="cierre-takeaways">
+      <div class="cierre-takeaway">
+        <div class="icono">⬤</div>
+        <h4>La estética es consecuencia</h4>
+        <p>El logo, los colores, los filtros — todo viene después de saber quién eres. No al revés.</p>
+      </div>
+      <div class="cierre-takeaway">
+        <div class="icono">🔄</div>
+        <h4>Identidad estable, imagen en evolución</h4>
+        <p>Puedes cambiar de look en cada lanzamiento. Lo que no cambia es el núcleo.</p>
+      </div>
+      <div class="cierre-takeaway">
+        <div class="icono">📋</div>
+        <h4>El brief es el punto de partida</h4>
+        <p>Sin un brief claro, cada decisión de imagen es un disparo al aire. Con él, todo tiene dirección.</p>
+      </div>
+    </div>
+    <div style="margin-top:1rem;">
+      <p style="font-size:0.82rem; opacity:0.6;">Próxima sesión: <strong>Semana 7 — Imagen Visual</strong> · Lo que hoy definiste en palabras, lo vamos a traducir a lo que la gente ve.</p>
+    </div>
+  </div>
+
+</div><!-- /slides -->
+
+<!-- NAV -->
+<nav class="nav">
+  <button onclick="prev()">←</button>
+  <span class="counter" id="counter">1 / 11</span>
+  <button onclick="next()">→</button>
+</nav>
+
+<script>
+  let current = 1;
+  const total = 11;
+
+  function showSlide(n) {
+    document.querySelector('.slide.active')?.classList.remove('active');
+    document.getElementById('slide-' + n).classList.add('active');
+    document.getElementById('counter').textContent = n + ' / ' + total;
+    current = n;
+  }
+
+  function next() { if (current < total) showSlide(current + 1); }
+  function prev() { if (current > 1) showSlide(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+  });
+</script>
+
+
+</body></html>
